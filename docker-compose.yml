@@ -1,0 +1,10 @@
+version: "3"
+services:
+ gancio-telegram-bot:
+  build: .
+  image: "gancio-telegram-bot"
+  container_name: "gancio-telegram-bot"
+  volumes:
+   - ./src:/app/src
+   - ./.env:/app/.env
+   - ./assets:/app/assets
