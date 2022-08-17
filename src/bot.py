@@ -109,7 +109,7 @@ async def page_turn_handler(callback_query):
 	message_to_change = callback_query.message
 
 	# get new events
-	response = await gancio_requests.requests.get_events(
+	response = await gancio_requests.request.get_events(
 		instance_url,
 		params={"start": utils.get_current_day_timestamp()},
 		cache=cache
@@ -156,7 +156,7 @@ async def page_turn_handler(callback_query):
 @bot.message_handler(commands=['calendario'])
 async def show_calendar(message):
 	# we need to request the events from the start of the current day
-	response = await gancio_requests.requests.get_events(
+	response = await gancio_requests.request.get_events(
 		instance_url,
 		params={"start": utils.get_current_day_timestamp()},
 		cache=cache
