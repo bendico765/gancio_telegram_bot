@@ -4,6 +4,7 @@ services:
   build: .
   image: "gancio-telegram-bot"
   container_name: "gancio-telegram-bot"
+  restart: "on-failure"
   volumes:
    - ./src:/app/src
    - ./.env:/app/.env
