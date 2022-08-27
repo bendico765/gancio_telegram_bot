@@ -33,10 +33,11 @@ def events_to_html_format(instance_url: str, events: list) -> str:
 		start_datetime = datetime.fromtimestamp(event["start_datetime"]).strftime("%d/%m/%Y %H:%M")
 		place_name = event["place"]["name"]
 		address = event["place"]["address"]
-		event_link = hlink("Approfondisci", f"{instance_url}/event/{slug}")
+		#event_link = hlink("Approfondisci", f"{instance_url}/event/{slug}")
 		# event_link = f"/event_{event_id}"
-		event_message = f"{title}\n\U0001F4CD {place_name} - {address}\n\U0001F550 {start_datetime}\n{event_link}"
+		#event_message = f"{title}\n\U0001F4CD {place_name} - {address}\n\U0001F550 {start_datetime}\n{event_link}"
+		event_message = f"{title}\n\U0001F4CD {place_name} - {address}\n\U0001F550 {start_datetime}\n"
 		if is_multidate:
-			event_message += "(Questo evento si compone di più date)"
-		reply_message += event_message + "\n\n"
+			event_message += "(Questo evento si compone di più date)\n"
+		reply_message += event_message + "\n"
 	return reply_message
