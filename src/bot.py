@@ -2,6 +2,7 @@ import os
 import asyncio
 import gancio_requests
 import utils
+import logging
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from telebot.async_telebot import AsyncTeleBot
 from telebot.formatting import hlink
@@ -10,6 +11,13 @@ from itertools import islice
 from aiohttp_client_cache import SQLiteBackend
 from math import ceil
 
+
+logging.basicConfig(
+	filename='logfile.log',
+	format="%(asctime)s:%(levelname)s:%(message)s",
+	encoding='utf-8',
+	level=logging.INFO
+)
 load_dotenv()
 token = os.getenv("AUTH_TOKEN")
 instance_url = os.getenv("INSTANCE_URL")
@@ -99,6 +107,7 @@ async def send_connection_error_message(message):
 
 @bot.message_handler(commands=['aiuto'])
 async def help(message):
+	logging.info(f"{message.from_user.username} needs help menu")
 	eigenlab_reference = "Fatto con \u2764 da " + hlink("EigenLab", "https://eigenlab.org/")
 	await bot.reply_to(message, eigenlab_reference, parse_mode="html")
 
@@ -155,6 +164,7 @@ async def page_turn_handler(callback_query):
 
 @bot.message_handler(commands=['calendario'])
 async def show_calendar(message):
+	logging.info(f"{message.from_user.username} fetches calendar")
 	# we need to request the events from the start of the current day
 	response = await gancio_requests.request.get_events(
 		instance_url,
