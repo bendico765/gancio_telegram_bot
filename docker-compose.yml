@@ -9,3 +9,4 @@ services:
    - ./src:/app/src
    - ./.env:/app/.env
    - ./assets:/app/assets
+   - ./logfile.log:/app/logfile.log
