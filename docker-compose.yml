@@ -6,7 +6,8 @@ services:
   container_name: "gancio-telegram-bot"
   restart: "on-failure"
   volumes:
-   - ./src:/app/src
-   - ./.env:/app/.env
-   - ./assets:/app/assets
-   - ./logfile.log:/app/logfile.log
+   - ./gancio_telegram_bot:/app/gancio_telegram_bot # source code
+   - ./.env:/app/.env # .env file
+   - ./assets:/app/assets # assets dir with images needed by the bot
+   - ./database:/app/database # directory with the .db database used for caching
+   - ./logfile.log:/app/logfile.log # file for logging

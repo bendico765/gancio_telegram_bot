@@ -11,7 +11,7 @@ _all_ = [
 
 def _parse_line(line: str) -> dict:
 	try:
-		line = line[0:-1] # delete newline
+		line = line[0:-1]  # delete newline
 		tokens = line.split(" ")
 
 		return {
@@ -32,7 +32,10 @@ def plot_week_calendar_usage(filename: str):
 		for line in f:
 			parsed_line = _parse_line(line)
 			if parsed_line == {}:
-				continue # a parsing error occured
+				continue  # a parsing error occured
+
+			if "fetches calendar" not in parsed_line["message"]:
+				continue
 
 			line_date = parsed_line["datetime"].date()
 			if str(line_date) in last_seven_days:
@@ -40,7 +43,7 @@ def plot_week_calendar_usage(filename: str):
 				number_requests[i] += 1
 
 	df = pd.DataFrame(
-		data = {
+		data={
 			"Day": last_seven_days,
 			"Calendar requests": number_requests
 		}
